@@ -1,10 +1,10 @@
-using System;
-
 using UnityEngine;
+using System.Collections;
 
 public class EnemyTarget : MonoBehaviour
 {
     [SerializeField] private float health;
+    [SerializeField] private float stunTime;
 
     public void TakeDamage(float damageAmount)
     {
@@ -12,12 +12,14 @@ public class EnemyTarget : MonoBehaviour
 
         if (health <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
-        Destroy(gameObject);
+        transform.GetComponent<Enemy>().canMove = false;
+        yield return new WaitForSeconds(stunTime);
+        transform.GetComponent<Enemy>().canMove = true;
     }
 }

@@ -15,19 +15,19 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = startHealth;
-        healthText.text = currentHealth.ToString();
     }
 
     private void Update()
     {
         healthBar.value = currentHealth;
+        healthText.text = currentHealth.ToString();
     }
 
     public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
 
-        if (startHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
